@@ -8,30 +8,30 @@
  * Controller of the nudgerApp
  */
 angular.module('nudgerApp')
-  .controller('MainCtrl', function ($scope) {
-
+  .controller('MainCtrl', function () {
+    var vm = this;
     // var result = document.querySelector('.result');
     var result = angular.element('.reslut');
     console.log(result);
 
-    $scope.command = '';
-    $scope.openSearch = false;
+    vm.command = '';
+    vm.openSearch = false;
 
-    $scope.change = function(input) {
+    vm.change = function(input) {
 
     	if (input === '/') {
-      	$scope.openSearch = true;
+      	vm.openSearch = true;
       } else {
-      	$scope.openSearch = false;
+      	vm.openSearch = false;
       }
 
       if (input === '/meme') {
-      	$scope.myMeme = 'https://i.imgur.com/3p4mOYk.jpg';
+      	vm.myMeme = 'https://i.imgur.com/3p4mOYk.jpg';
       }
 
     };
 
-    $scope.submitCommand = function(input) {
+    vm.submitCommand = function(input) {
       console.log(input);
       if (input) {
         var commandObj = {
@@ -39,7 +39,7 @@ angular.module('nudgerApp')
           appResponse: 'oh yeah'
         };
         scrollToBottom();
-        $scope.commandHistory.push(commandObj);
+        vm.commandHistory.push(commandObj);
       }
     };
 
@@ -48,7 +48,7 @@ angular.module('nudgerApp')
       result.scrollTop = result.scrollHeight;
     }
 
-    $scope.commandHistory = [{
+    vm.commandHistory = [{
       userCommand: 'YO',
       appResponse: 'Null'
     }];

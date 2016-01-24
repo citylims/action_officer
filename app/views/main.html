@@ -3,13 +3,13 @@
 <div class="window">
 
   <div class="feed">
-    <ul ng-if="!commandHistory" class="result">
+    <ul ng-if="!vm.commandHistory" class="result">
       <li class="ready">Ready…</li>
     </ul>
 
-    <ul ng-if="commandHistory" class='result' feed-scroll="commandHistory">
+    <ul ng-if="vm.commandHistory" class='result' feed-scroll="vm.commandHistory">
       <li class="ready">Ready…</li>
-      <div ng-repeat="command in commandHistory">
+      <div ng-repeat="command in vm.commandHistory">
         <li class='userPrint' style="color:#c7c7d1"><span class="path">$</span>{{command.userCommand}}</li>
         <li><span class="response">~~~</span>{{command.appResponse}}</li>
       </div>
@@ -19,9 +19,9 @@
 
   <div class="command-area">
     <label for="command-input">$</label>
-    <input type="text" id="command-input" class="command" ng-model='command' ng-change='change(command)' my-enter="submitCommand(command)" placeholder="type command here…" />
+    <input type="text" id="command-input" class="command" ng-model='vm.command' ng-change='vm.change(vm.command)' my-enter="vm.submitCommand(vm.command)" placeholder="type command here…" />
   </div>
 
 </div>
 
-<span>{{command}}</span>
+<span>{{vm.command}}</span>
