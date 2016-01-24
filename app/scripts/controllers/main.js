@@ -10,58 +10,63 @@
 angular.module('nudgerApp')
   .controller('MainCtrl', function () {
     var vm = this;
-    // var result = document.querySelector('.result');
-    var result = angular.element('.reslut');
-    console.log(result);
-
     vm.command = '';
     vm.openSearch = false;
+    vm.appCommands = ['/', '/meme'];
+    vm.commandHistory = [{
+      userCommand: 'YO',
+      appResponse: 'Test Response'
+    }];
 
     vm.change = function(input) {
+      readCommand(input);
+    };
 
-    	if (input === '/') {
-      	vm.openSearch = true;
-      } else {
-      	vm.openSearch = false;
+    vm.submitCommand = function(input) {
+      if (input) {
+        if (vm.appCommands.indexOf(input) >= 0) {
+          readCommand(input);
+        } else {
+          vm.command = '';
+          var commandObj = {
+            userCommand: input,
+            appResponse: 'oh yeah'
+          };
+          vm.commandHistory.push(commandObj);
+        }
       }
-
-      if (input === '/meme') {
-      	vm.myMeme = 'https://i.imgur.com/3p4mOYk.jpg';
-      } else {
-        vm.myMeme = null;
-      }
-
     };
 
     vm.selectMeme =  function(input) {
       console.log(input);
       var commandObj = {
         image: input
-      }
+      };
       vm.commandHistory.push(commandObj);
-    }
-
-    vm.submitCommand = function(input) {
-      console.log(input);
-      if (input) {
-        var commandObj = {
-          userCommand: input,
-          appResponse: 'oh yeah'
-        };
-        scrollToBottom();
-        vm.commandHistory.push(commandObj);
-      }
+      vm.command = '';
     };
 
-    function scrollToBottom() {
-      console.log(result);
-      result.scrollTop = result.scrollHeight;
-    }
+    //turn this into case statement and put in service
+    function readCommand(command) {
 
-    vm.commandHistory = [{
-      userCommand: 'YO',
-      appResponse: 'Test Response'
-    }];
+      if (vm.appCommands.indexOf(command) < 0) {
+        return;
+      }
+
+      if (command === '/') {
+      	vm.openSearch = true;
+      } else {
+      	vm.openSearch = false;
+      }
+
+      if (command === '/meme') {
+      	vm.myMeme = 'https://i.imgur.com/3p4mOYk.jpg';
+      } else {
+        vm.myMeme = null;
+      }
+
+      // if command doesn't match submit as comment;
+    }
 
     this.awesomeThings = [
       'HTML5 Boilerplate',

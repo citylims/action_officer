@@ -43,7 +43,7 @@ app.directive('myEnter', function () {
   };
 });
 
-app.directive('feedScroll', function () {
+app.directive('feedScroll', function ($timeout) {
   return {
     scope: {
       feedScroll: '='
@@ -51,7 +51,11 @@ app.directive('feedScroll', function () {
     link: function (scope, element) {
       scope.$watchCollection('feedScroll', function (newValue) {
         if (newValue) {
-          (element).scrollTop((element)[0].scrollHeight);
+          $timeout(function() {
+            var scrollHeight = (element[0].scrollHeight);
+            (element).scrollTop(scrollHeight);
+          }, 1000);
+
         }
       });
     }
