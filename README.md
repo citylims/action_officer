@@ -1,7 +1,6 @@
-# nudger
+# Action Officer
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.15.1.
+Input actions similar à la Slack.
 
 ## Build & development
 
