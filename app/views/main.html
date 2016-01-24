@@ -1,23 +1,27 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+
+
+<div class="window">
+
+  <div class="feed">
+    <ul ng-if="!commandHistory" class="result">
+      <li class="ready">Ready…</li>
+    </ul>
+
+    <ul ng-if="commandHistory" class='result' feed-scroll="commandHistory">
+      <li class="ready">Ready…</li>
+      <div ng-repeat="command in commandHistory">
+        <li class='userPrint' style="color:#c7c7d1"><span class="path">$</span>{{command.userCommand}}</li>
+        <li><span class="response">~~~</span>{{command.appResponse}}</li>
+      </div>
+
+    </ul>
+  </div>
+
+  <div class="command-area">
+    <label for="command-input">$</label>
+    <input type="text" id="command-input" class="command" ng-model='command' ng-change='change(command)' my-enter="submitCommand(command)" placeholder="type command here…" />
+  </div>
+
 </div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
-
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
-
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>
+<span>{{command}}</span>

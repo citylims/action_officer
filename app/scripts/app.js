@@ -8,7 +8,7 @@
  *
  * Main module of the application.
  */
-angular
+var app = angular
   .module('nudgerApp', [
     'ngAnimate',
     'ngRoute'
@@ -29,3 +29,31 @@ angular
         redirectTo: '/'
       });
   });
+
+app.directive('myEnter', function () {
+  return function (scope, element, attrs) {
+    element.bind('keydown keypress', function (event) {
+      if(event.which === 13) {
+        scope.$apply(function (){
+          scope.$eval(attrs.myEnter);
+        });
+      event.preventDefault();
+      }
+    });
+  };
+});
+
+app.directive('feedScroll', function () {
+  return {
+    scope: {
+      feedScroll: '='
+    },
+    link: function (scope, element) {
+      scope.$watchCollection('feedScroll', function (newValue) {
+        if (newValue) {
+          (element).scrollTop((element)[0].scrollHeight);
+        }
+      });
+    }
+  };
+});

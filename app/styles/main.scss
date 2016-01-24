@@ -3,25 +3,6 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
-
-body {
-  padding: 0;
-}
-
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
 /* Custom page header */
 .header {
   border-bottom: 1px solid #e5e5e5;
@@ -47,25 +28,149 @@ body {
   margin: 30px 0;
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
+*  {
+  box-sizing: border-box;
+}
 
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
+html,
+body {
+  min-height: 100%; // required so gradient background will stretch to fill entire viewport
+}
+
+body {
+  background: linear-gradient(135deg,#593188,#2c318f);
+  color: #3df5b8;
+  font: 400 20px/1.625 "Source Sans Pro", sans-serif;
+  padding: 2em;
+}
+
+.window {
+  background: black;
+  border-radius: 0.5em;
+  box-shadow: 0 0.75em 3em #311a50;
+
+  margin: 2em auto; // center window
+  max-width: 40em;
+  min-height: 20em;
+  padding-right: 4px; // so scrollbar is 4px away from right edge
+
+  overflow: hidden; // to clip interior content to border-radius
+  position: relative; // to position .command-area absolutely
+
+  // fade text at top of window when scrolled down
+  &::before {
+    /* background: linear-gradient(#2a2558 38%,rgba(#2a2558,0)); */ // background color to transparent
+    content: ''; // required for ::before
+    position: absolute;
+      top: 0; right: 0; left: 0;
+    height: 2em;
+    z-index: 100; // bring above text
   }
 }
 
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
+.result {
+  margin: 0;
+  padding: 2em 2em 1em;
+  height: 16em; // set height and...
+  overflow-y: auto; //... scroll anything over that height
 
-  p + h4 {
-    margin-top: 28px;
+  li {
+    display: block; // removes list style
+    // Fade in and up animation
+    animation: appear 0.5s ease-in-out forwards;
+    opacity: 0;
+    transform: translateY(150%);
+
+    @at-root { // Compile code out to top level
+      .path {
+        color: #29FE14;
+        margin-right: 3px;
+      }
+
+      &.ready {
+        animation: none;
+        font-style: italic;
+        margin-top: -0.5em;
+        margin-bottom: 0.5em;
+        transform: none;
+        opacity: 0.5;
+      }
+
+      @keyframes appear {
+        100% {
+          transform: none;
+          opacity: 1;
+        }
+
+      }
+
+    }
+
+    // Styling for command response
+    &:nth-child(even) {
+      animation-delay: 0.75s;
+      color: HSL(115, 99%, 54%);
+    }
+  }
+
+  // Styled scrollbar
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #36aa95;
+    border-radius: 10px;
   }
 }
+
+.command-area {
+  background: #201840;
+  color: #29FE14;
+  padding: 1em;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+label {
+  line-height: 2em; // vertically center
+  float: left;
+  width: 4%;
+}
+
+input {
+  background: black;
+  border: 0;
+  float: left;
+  font: inherit; // use parents' font
+  transition: 0.5s;
+  outline: 1px solid #231f50;
+  padding: 0.25em 0.5em;
+  width: 96%;
+
+  &:focus {
+    outline: 1px solid hsl(160,90%,60%);
+  }
+
+  // Style placeholder text
+  &::-webkit-input-placeholder {
+    color: inherit;
+    font-style: italic;
+  }
+
+  &::-moz-placeholder {
+    color: inherit;
+    font-style: italic;
+  }
+
+  // Future syntax
+  &::placeholder {
+    color: inherit;
+    font-style: italic;
+  }
+}
+
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {

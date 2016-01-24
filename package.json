@@ -38,5 +38,9 @@
   },
   "scripts": {
     "test": "grunt test"
+  },
+  "dependencies": {
+    "karma": "^0.13.19",
+    "phantomjs": "^1.9.19"
   }
 }
