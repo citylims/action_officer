@@ -38,7 +38,7 @@ body {
 }
 
 body {
-  background: linear-gradient(135deg,#593188,#2c318f);
+  background: linear-gradient(135deg,#593188,#53346D);
   color: #3df5b8;
   font: 400 20px/1.625 "Source Sans Pro", sans-serif;
   padding: 2em;
@@ -49,33 +49,32 @@ body {
   border-radius: 0.5em;
   box-shadow: 0 0.75em 3em #311a50;
 
-  margin: 2em auto; // center window
-  max-width: 40em;
+  margin: 2em auto;
+  max-width: 55em;
   min-height: 20em;
-  padding-right: 4px; // so scrollbar is 4px away from right edge
+  padding-right: 4px;
 
   overflow: hidden; // to clip interior content to border-radius
   position: relative; // to position .command-area absolutely
 
   // fade text at top of window when scrolled down
   &::before {
-    /* background: linear-gradient(#2a2558 38%,rgba(#2a2558,0)); */ // background color to transparent
     content: ''; // required for ::before
     position: absolute;
       top: 0; right: 0; left: 0;
     height: 2em;
-    z-index: 100; // bring above text
+    z-index: 100;
   }
 }
 
 .result {
   margin: 0;
   padding: 2em 2em 1em;
-  height: 16em; // set height and...
-  overflow-y: auto; //... scroll anything over that height
+  height: 16em;
+  overflow-y: auto; //scroll anything over height
 
   li {
-    display: block; // removes list style
+    display: block;
     // Fade in and up animation
     animation: appear 0.5s ease-in-out forwards;
     opacity: 0;
@@ -168,7 +167,7 @@ input {
     font-style: italic;
   }
 
-  // Future syntax
+  // Placeholder syntax
   &::placeholder {
     color: inherit;
     font-style: italic;
