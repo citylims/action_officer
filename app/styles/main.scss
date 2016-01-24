@@ -82,6 +82,10 @@ body {
     transform: translateY(150%);
 
     @at-root { // Compile code out to top level
+      .feed-image {
+        max-width: 250px;
+      }
+
       .path {
         color: #29FE14;
         margin-right: 3px;

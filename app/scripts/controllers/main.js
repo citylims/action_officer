@@ -27,9 +27,19 @@ angular.module('nudgerApp')
 
       if (input === '/meme') {
       	vm.myMeme = 'https://i.imgur.com/3p4mOYk.jpg';
+      } else {
+        vm.myMeme = null;
       }
 
     };
+
+    vm.selectMeme =  function(input) {
+      console.log(input);
+      var commandObj = {
+        image: input
+      }
+      vm.commandHistory.push(commandObj);
+    }
 
     vm.submitCommand = function(input) {
       console.log(input);
@@ -50,7 +60,7 @@ angular.module('nudgerApp')
 
     vm.commandHistory = [{
       userCommand: 'YO',
-      appResponse: 'Null'
+      appResponse: 'Test Response'
     }];
 
     this.awesomeThings = [
