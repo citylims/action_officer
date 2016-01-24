@@ -1,6 +1,6 @@
 # Action Officer
 
-Input actions similar à la Slack.
+Input actions à la Slack.
 
 ## Build & development
 
