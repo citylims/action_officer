@@ -54,7 +54,7 @@ app.directive('feedScroll', function ($timeout) {
           $timeout(function() {
             var scrollHeight = (element[0].scrollHeight);
             (element).scrollTop(scrollHeight);
-          }, 1);
+          }, 1000);
         }
       });
     }
