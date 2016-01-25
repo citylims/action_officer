@@ -11,7 +11,8 @@
 var app = angular
   .module('nudgerApp', [
     'ngAnimate',
-    'ngRoute'
+    'ngRoute',
+    'ui.bootstrap'
   ])
   .config(function ($routeProvider) {
     $routeProvider

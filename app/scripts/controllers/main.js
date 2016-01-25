@@ -10,17 +10,26 @@
 angular.module('nudgerApp')
   .controller('MainCtrl', function (GifService, AIService) {
     var vm = this;
+    //command ui
     vm.command = '';
-    vm.openSearch = false;
     vm.appCommands = ['/', '/meme'];
     vm.commandHistory = [{
       userCommand: 'YO',
       appResponse: 'Test Response'
     }];
+    //ui displays
+    vm.openSearch = false;
     vm.loading = false;
+    //date
+    vm.dt = AIService.today();
+    vm.formattedDate = moment(vm.dt).format('MM/DD/YYYY');
 
     function init() {
       getGif();
+    }
+
+    function clearCommand() {
+      vm.command = '';
     }
 
     function getGif() {
@@ -38,7 +47,7 @@ angular.module('nudgerApp')
         if (vm.appCommands.indexOf(input) >= 0) {
           readCommand(input);
         } else {
-          vm.command = '';
+          clearCommand()
           var aiResponse = AIService.returnResponse();
           var commandObj = {
             userCommand: input,
@@ -54,7 +63,7 @@ angular.module('nudgerApp')
         image: input
       };
       vm.commandHistory.push(commandObj);
-      vm.command = '';
+      clearCommand();
       refreshUI();
     };
 
@@ -66,14 +75,32 @@ angular.module('nudgerApp')
     function refreshUI() {
       vm.openSearch = false;
       vm.myMeme = undefined;
+      vm.displayDatePicker = false;
       return;
     }
+
+    vm.submitAppointment = function(msg) {
+      if (msg && vm.dt) {
+        clearCommand();
+        // //make post request to server then...
+        console.log(msg);
+        var date = moment(vm.dt).format('MM/DD/YYYY');
+        var text = date + ' : ' + msg;
+        console.log(text);
+        var commandObj = {
+          appointment: {
+            date: date,
+            text: msg
+          }
+        };
+        vm.commandHistory.push(commandObj);
+      }
+    };
 
     //turn this into case statement and put in service
     function readCommand(command) {
       //no matched
       if (vm.appCommands.indexOf(command) < 0) {
-        //inactive
         refreshUI();
       }
 
@@ -87,6 +114,10 @@ angular.module('nudgerApp')
         } else {
           vm.myMeme = 'https://i.imgur.com/3p4mOYk.jpg';
         }
+      }
+
+      if (command === '/date') {
+        vm.displayDatePicker = true;
       }
       // if command doesn't match submit as comment;
     }

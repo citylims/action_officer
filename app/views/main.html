@@ -3,19 +3,21 @@
 <div class="window">
 
   <div class="feed">
-    
+
     <ul ng-if="!vm.commandHistory" class="result">
       <li class="ready">Ready…</li>
     </ul>
 
     <ul ng-if="vm.commandHistory" class='result' feed-scroll="vm.commandHistory">
       <div ng-repeat="command in vm.commandHistory">
-        <li ng-if="command.userCommand" class='userPrint' style="color:#c7c7d1">
+        <li ng-if="command.userCommand" class='user-print'>
           <span class="path">$</span>{{command.userCommand}}
         </li>
         <li ng-if="command.image">
           <img class="feed-image" ng-src="{{command.image}}">
         </li>
+        <li ng-if="command.appointment" class='user-print'>
+          <span class="date" style="color:red">New Appointment for {{command.appointment.date}}: </span>{{command.appointment.text}}
         <li ng-if="command.appResponse">
           <span class="response">~</span>{{command.appResponse}}
         </li>
@@ -29,9 +31,21 @@
     <label for="command-input">$</label>
     <input type="text" id="command-input" class="command" ng-model='vm.command' ng-change='vm.change(vm.command)' my-enter="vm.submitCommand(vm.command)" placeholder="type command here…" />
   </div>
-  <!-- hook this up to giphy -->
 
+</div>
 
+<div class="container">
+  <div ng-if="vm.displayDatePicker" class="row">
+  <!-- <div ng-if="vm.displayDatePicker" style="display:inline-block; min-height:290px;"> -->
+    <div class="col-md-6">
+     <uib-datepicker ng-model="vm.dt" show-weeks="true" class="well well-sm" ></uib-datepicker>
+    </div>
+    <div class="col-md-6">
+      <!-- <p>{{vm.dt}}</p> -->
+      <textarea ng-model="vm.dateMessage" placeholder="{{vm.dt}}" class="form-control"rows="10" style="resize:none" ng-change="vm.bar()"></textarea>
+      <button ng-click="vm.submitAppointment(vm.dateMessage)">Submit date</button>
+    </div>
+  </div>
 </div>
 
 <img ng-if="vm.myMeme" ng-src="{{vm.myMeme}}" ng-click="vm.selectMeme(vm.myMeme)" alt="meme">

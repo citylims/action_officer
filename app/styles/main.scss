@@ -72,6 +72,10 @@ body {
   height: 25em;
   overflow-y: auto; //scroll anything over height
 
+  .user-print {
+    color:#c7c7d1;
+  }
+
   li {
     display: block;
     // Fade in and up animation
@@ -170,6 +174,10 @@ input {
     color: inherit;
     font-style: italic;
   }
+}
+
+.date-textarea {
+  /* min-height: 250px */;
 }
 
 

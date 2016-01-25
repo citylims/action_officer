@@ -22,8 +22,13 @@ angular.module('nudgerApp')
       return index;
     }
 
+    function today() {
+      return new Date();
+    }
+
     return {
       returnResponse: returnResponse,
-      randomIndex: randomIndex
+      randomIndex: randomIndex,
+      today: today
     };
   });
