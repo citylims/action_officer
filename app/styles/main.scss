@@ -82,6 +82,7 @@ body {
 
     @at-root { // Compile code out to top level
       .feed-image {
+        margin: 10px 0;
         max-width: 250px;
       }
 
