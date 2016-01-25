@@ -26,6 +26,7 @@ angular.module('nudgerApp')
     vm.formattedDate = moment(vm.dt).format('MM/DD/YYYY');
 
     function init() {
+      vm.loading = true;
       getGif();
     }
 
@@ -35,6 +36,7 @@ angular.module('nudgerApp')
 
     function getGif() {
       GifService.trendingGif().then(function(data) {
+        vm.loading = false;
         vm.gifs = data;
       });
     }
