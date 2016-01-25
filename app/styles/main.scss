@@ -3,6 +3,8 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+$main-color: #29FE14;
+
 /* Custom page header */
 .header {
   border-bottom: 1px solid #e5e5e5;
@@ -90,7 +92,7 @@ body {
       }
 
       .path {
-        color: #29FE14;
+        color: $main-color;
         margin-right: 3px;
       }
 
@@ -131,7 +133,7 @@ body {
 
 .command-area {
   background: #201840;
-  color: #29FE14;
+  color: $main-color;
   padding: 1em;
   position: absolute;
   bottom: 0;

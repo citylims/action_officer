@@ -32,6 +32,7 @@ angular.module('nudgerApp')
 
     function clearCommand() {
       vm.command = '';
+      vm.dateMessage = '';
     }
 
     function getGif() {
@@ -97,6 +98,7 @@ angular.module('nudgerApp')
             text: msg
           }
         };
+        refreshUI();
         vm.commandHistory.push(commandObj);
       }
     };
