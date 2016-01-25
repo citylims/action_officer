@@ -51,7 +51,7 @@ body {
 
   margin: 2em auto;
   max-width: 55em;
-  min-height: 20em;
+  min-height: 25em;
   padding-right: 4px;
 
   overflow: hidden; // to clip interior content to border-radius
@@ -69,8 +69,8 @@ body {
 
 .result {
   margin: 0;
-  padding: 2em 2em 1em;
-  height: 16em;
+  padding: 2em 2em 5em;
+  height: 25em;
   overflow-y: auto; //scroll anything over height
 
   li {
