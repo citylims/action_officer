@@ -12,7 +12,7 @@ angular.module('nudgerApp')
     var vm = this;
     //command ui
     vm.command = '';
-    vm.appCommands = ['/', '/meme'];
+    vm.appCommands = ['/', '/manual', '/meme', '/date'];
     vm.commandHistory = [{
       userCommand: 'YO',
       appResponse: 'Test Response'
@@ -20,6 +20,7 @@ angular.module('nudgerApp')
     //ui displays
     vm.openSearch = false;
     vm.loading = false;
+    vm.displayManual = false;
     //date
     vm.dt = AIService.today();
     vm.formattedDate = moment(vm.dt).format('MM/DD/YYYY');
@@ -47,7 +48,7 @@ angular.module('nudgerApp')
         if (vm.appCommands.indexOf(input) >= 0) {
           readCommand(input);
         } else {
-          clearCommand()
+          clearCommand();
           var aiResponse = AIService.returnResponse();
           var commandObj = {
             userCommand: input,
@@ -76,6 +77,7 @@ angular.module('nudgerApp')
       vm.openSearch = false;
       vm.myMeme = undefined;
       vm.displayDatePicker = false;
+      vm.displayManual = false;
       return;
     }
 
@@ -106,6 +108,10 @@ angular.module('nudgerApp')
 
       if (command === '/') {
       	vm.openSearch = true;
+      }
+
+      if (command === '/manual') {
+        vm.displayManual = true;
       }
 
       if (command === '/meme') {

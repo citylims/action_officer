@@ -34,6 +34,12 @@
 
 </div>
 
+<div ng-if="vm.displayManual" class="command-manual">
+  <p ng-repeat="command in vm.appCommands"> {{command}} </p>
+</div>
+
+
+
 <div class="container">
   <div ng-if="vm.displayDatePicker" class="row">
   <!-- <div ng-if="vm.displayDatePicker" style="display:inline-block; min-height:290px;"> -->
