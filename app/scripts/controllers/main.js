@@ -8,7 +8,7 @@
  * Controller of the nudgerApp
  */
 angular.module('nudgerApp')
-  .controller('MainCtrl', function (GifService) {
+  .controller('MainCtrl', function (GifService, AIService) {
     var vm = this;
     vm.command = '';
     vm.openSearch = false;
@@ -38,9 +38,10 @@ angular.module('nudgerApp')
           readCommand(input);
         } else {
           vm.command = '';
+          var aiResponse = AIService.returnResponse();
           var commandObj = {
             userCommand: input,
-            appResponse: 'oh yeah'
+            appResponse: aiResponse
           };
           vm.commandHistory.push(commandObj);
         }
@@ -57,7 +58,7 @@ angular.module('nudgerApp')
     };
 
     function randomGif(gifs) {
-      var gif = gifs[Math.floor(Math.random()*gifs.length)];
+      var gif = AIService.randomIndex(gifs);
       return gif.images.downsized.url;
     }
 
