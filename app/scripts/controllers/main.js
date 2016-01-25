@@ -17,6 +17,7 @@ angular.module('nudgerApp')
       userCommand: 'YO',
       appResponse: 'Test Response'
     }];
+    vm.loading = false;
 
     function init() {
       getGif();

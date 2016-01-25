@@ -68,7 +68,7 @@ body {
 
 .result {
   margin: 0;
-  padding: 2em 2em 5em;
+  padding: 1em 2em 5em;
   height: 25em;
   overflow-y: auto; //scroll anything over height
 
@@ -90,11 +90,9 @@ body {
         margin-right: 3px;
       }
 
-      &.ready {
+      &.loading {
         animation: none;
         font-style: italic;
-        margin-top: -0.5em;
-        margin-bottom: 0.5em;
         transform: none;
         opacity: 0.5;
       }

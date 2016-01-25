@@ -3,12 +3,12 @@
 <div class="window">
 
   <div class="feed">
+    
     <ul ng-if="!vm.commandHistory" class="result">
       <li class="ready">Ready…</li>
     </ul>
 
     <ul ng-if="vm.commandHistory" class='result' feed-scroll="vm.commandHistory">
-      <li class="ready">Ready…</li>
       <div ng-repeat="command in vm.commandHistory">
         <li ng-if="command.userCommand" class='userPrint' style="color:#c7c7d1">
           <span class="path">$</span>{{command.userCommand}}
@@ -20,8 +20,9 @@
           <span class="response">~</span>{{command.appResponse}}
         </li>
       </div>
-
+      <li ng-if="vm.loading" class="loading">Loading ...</li>
     </ul>
+
   </div>
 
   <div class="command-area">
