@@ -1,5 +1,3 @@
-
-
 <div class="window">
 
   <div class="feed">
@@ -26,7 +24,7 @@
     </ul>
 
   </div>
-
+  <!-- user input -->
   <div class="command-area">
     <label for="command-input">$</label>
     <input type="text" id="command-input" class="command" ng-model='vm.command' ng-change='vm.change(vm.command)' my-enter="vm.submitCommand(vm.command)" placeholder="type command here…" />
@@ -34,25 +32,28 @@
 
 </div>
 
-<div ng-if="vm.displayManual" class="command-manual">
-  <p ng-repeat="command in vm.appCommands"> {{command}} </p>
-</div>
+<div class="playground">
+<!-- manual -->
+  <div ng-if="vm.displayManual" class="command-manual">
+    <p ng-repeat="command in vm.appCommands"> {{command}} </p>
+  </div>
 
-
-
-<div class="container">
-  <div ng-if="vm.displayDatePicker" class="row">
-  <!-- <div ng-if="vm.displayDatePicker" style="display:inline-block; min-height:290px;"> -->
-    <div class="col-md-6">
-     <uib-datepicker ng-model="vm.dt" show-weeks="true" class="well well-sm" ></uib-datepicker>
-    </div>
-    <div class="col-md-6">
-      <!-- <p>{{vm.dt}}</p> -->
-      <textarea ng-model="vm.dateMessage" placeholder="{{vm.dt}}" class="form-control"rows="10" style="resize:none" ng-change="vm.bar()"></textarea>
-      <button ng-click="vm.submitAppointment(vm.dateMessage)">Submit date</button>
+  <!-- date-picker -->
+  <div class="container">
+    <div ng-if="vm.displayDatePicker" class="row">
+      <div class="col-md-6">
+       <uib-datepicker ng-model="vm.dt" show-weeks="true" class="well well-sm" ></uib-datepicker>
+      </div>
+      <div class="col-md-6">
+        <textarea ng-model="vm.dateMessage" placeholder="{{vm.dt}}" class="form-control"rows="10" style="resize:none"></textarea>
+        <button ng-click="vm.submitAppointment(vm.dateMessage)">Submit date</button>
+      </div>
     </div>
   </div>
-</div>
 
-<img ng-if="vm.myMeme" ng-src="{{vm.myMeme}}" ng-click="vm.selectMeme(vm.myMeme)" alt="meme">
-<span>{{vm.command}}</span>
+  <!-- img-preview -->
+  <img ng-if="vm.myGif" ng-src="{{vm.myGif}}" ng-click="vm.selectGif(vm.myGif)">
+
+  <!-- data-bind -->
+  <span>{{vm.command}}</span>
+</div>
