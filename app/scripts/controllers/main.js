@@ -12,7 +12,7 @@ angular.module('nudgerApp')
     var vm = this;
     //command ui
     vm.command = '';
-    vm.appCommands = ['/', '/manual', '/meme', '/date'];
+    vm.appCommands = ['/', '/manual', '/gif', '/date'];
     vm.commandHistory = [{
       userCommand: 'YO',
       appResponse: 'Test Response'
@@ -28,6 +28,12 @@ angular.module('nudgerApp')
     function init() {
       vm.loading = true;
       getGif();
+    }
+
+    function pushCommand(obj) {
+      vm.commandHistory.push(obj);
+      clearCommand();
+      refreshUI();
     }
 
     function clearCommand() {
@@ -46,30 +52,56 @@ angular.module('nudgerApp')
       readCommand(input);
     };
 
-    vm.submitCommand = function(input) {
-      if (input) {
-        if (vm.appCommands.indexOf(input) >= 0) {
-          readCommand(input);
+    vm.submitCommand = function(command) {
+      //action statement ;)
+      if (command) {
+        if (vm.appCommands.indexOf(command) >= 0) {
+          handleCommand(command);
         } else {
-          clearCommand();
-          var aiResponse = AIService.returnResponse();
-          var commandObj = {
-            userCommand: input,
-            appResponse: aiResponse
-          };
-          vm.commandHistory.push(commandObj);
+          appendCommand(command);
         }
       }
     };
 
-    vm.selectMeme =  function(input) {
-      var commandObj = {
-        image: input
-      };
-      vm.commandHistory.push(commandObj);
+    vm.submitAppointment = function(msg) {
+      appendAppointment(msg);
+    };
+
+    vm.selectGif =  function(url) {
+      appendImg(url);
       clearCommand();
       refreshUI();
     };
+
+    function appendCommand(command) {
+      var aiResponse = AIService.returnResponse();
+      var feedObj = {
+        userCommand: command,
+        appResponse: aiResponse
+      };
+      pushCommand(feedObj);
+    }
+
+    function appendImg(url) {
+      var feedObj = {
+        image: url
+      };
+      pushCommand(feedObj);
+    }
+
+    function appendAppointment(msg) {
+      if (msg && vm.dt) {
+        // //make post request to server then...
+        var date = moment(vm.dt).format('MM/DD/YYYY');
+        var feedObj = {
+          appointment: {
+            date: date,
+            text: msg
+          }
+        };
+        pushCommand(feedObj);
+      }
+    }
 
     function randomGif(gifs) {
       var gif = AIService.randomIndex(gifs);
@@ -78,32 +110,13 @@ angular.module('nudgerApp')
 
     function refreshUI() {
       vm.openSearch = false;
-      vm.myMeme = undefined;
+      vm.myGif = undefined;
       vm.displayDatePicker = false;
       vm.displayManual = false;
       return;
     }
 
-    vm.submitAppointment = function(msg) {
-      if (msg && vm.dt) {
-        clearCommand();
-        // //make post request to server then...
-        console.log(msg);
-        var date = moment(vm.dt).format('MM/DD/YYYY');
-        var text = date + ' : ' + msg;
-        console.log(text);
-        var commandObj = {
-          appointment: {
-            date: date,
-            text: msg
-          }
-        };
-        refreshUI();
-        vm.commandHistory.push(commandObj);
-      }
-    };
-
-    //turn this into case statement and put in service
+    //ui actions
     function readCommand(command) {
       //no matched
       if (vm.appCommands.indexOf(command) < 0) {
@@ -118,11 +131,11 @@ angular.module('nudgerApp')
         vm.displayManual = true;
       }
 
-      if (command === '/meme') {
+      if (command === '/gif') {
         if(vm.gifs) {
-          vm.myMeme = randomGif(vm.gifs);
+          vm.myGif = randomGif(vm.gifs);
         } else {
-          vm.myMeme = 'https://i.imgur.com/3p4mOYk.jpg';
+          vm.myGif = 'https://i.imgur.com/3p4mOYk.jpg';
         }
       }
 
@@ -130,6 +143,17 @@ angular.module('nudgerApp')
         vm.displayDatePicker = true;
       }
       // if command doesn't match submit as comment;
+    }
+
+    //execute command actions
+    function handleCommand(command) {
+      console.log(command);
+      if (command === '/gif') {
+        appendImg(vm.myGif);
+      }
+      if (command === '/date') {
+        appendAppointment(vm.dateMessage);
+      }
     }
 
     init();
