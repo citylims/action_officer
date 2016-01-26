@@ -8,11 +8,11 @@
  * Controller of the nudgerApp
  */
 angular.module('nudgerApp')
-  .controller('MainCtrl', function (GifService, AIService, MemeService) {
+  .controller('MainCtrl', function ($http, GifService, AIService, MemeService, NasaService) {
     var vm = this;
     //command ui
     vm.command = '';
-    vm.appCommands = ['/', '/manual', '/gif', '/date', '/meme', '/clear'];
+    vm.appCommands = ['/', '/manual', '/gif', '/date', '/meme', '/clear', '/mars'];
     vm.commandHistory = [{
       appResponse: 'Welcome'
     }];
@@ -28,6 +28,7 @@ angular.module('nudgerApp')
       vm.loading = true;
       getGifs();
       getMemes();
+      getMars();
     }
 
     function pushCommand(obj) {
@@ -52,6 +53,14 @@ angular.module('nudgerApp')
       MemeService.meme().then(function(data) {
         vm.loading = false;
         vm.memes = data;
+      });
+    }
+
+    function getMars() {
+      NasaService.mars().then(function(data){
+        vm.loading = false;
+        vm.mars = data.photos;
+        console.log(vm.mars);
       });
     }
 
@@ -129,6 +138,13 @@ angular.module('nudgerApp')
       return meme.url;
     }
 
+    function randomMars(mars) {
+      var data = AIService.randomIndex(mars);
+      console.log(data);
+      //want to parse json and create a display obj with more info.
+      return data.img_src;
+    }
+
     function refreshUI() {
       vm.openSearch = false;
       vm.myGif = undefined;
@@ -171,6 +187,13 @@ angular.module('nudgerApp')
         }
       }
 
+      if (command === '/mars') {
+        if (vm.mars) {
+          vm.myPhoto = randomMars(vm.mars);
+          console.log(vm.myPhoto);
+        }
+      }
+
     }
 
     //execute command actions
@@ -184,11 +207,16 @@ angular.module('nudgerApp')
       }
       if (command === '/meme') {
         appendImg(vm.myMeme);
-      } if (command === '/clear') {
+      }
+      if (command === '/clear') {
         while(vm.commandHistory.length > 0) {
           vm.commandHistory.pop();
         }
         console.log(vm.commandHistory);
+      }
+      if (command === '/mars') {
+        console.log(command);
+        appendImg(vm.myPhoto);
       }
       if (command.substr(0, 4) === 'sudo') {
         var forkBomb = AIService.sudo(command);

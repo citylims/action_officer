@@ -65,8 +65,11 @@
   </div>
 
   <!-- img-preview -->
-  <img ng-if="vm.myGif" ng-src="{{vm.myGif}}" ng-click="vm.selectImg(vm.myGif)">
-  <img ng-if="vm.myMeme" ng-src="{{vm.myMeme}}" ng-click="vm.selectImg(vm.myMeme)">
+  <div class="img-preview">
+    <img ng-if="vm.myGif" ng-src="{{vm.myGif}}" ng-click="vm.selectImg(vm.myGif)">
+    <img ng-if="vm.myMeme" ng-src="{{vm.myMeme}}" ng-click="vm.selectImg(vm.myMeme)">
+    <img ng-if="vm.myPhoto" ng-src="{{vm.myPhoto}}" ng-click="vm.selectImg(vm.myPhoto)">
+  </div>
 
   <!-- data-bind -->
   <span>{{vm.command}}</span>
