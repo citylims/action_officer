@@ -129,7 +129,37 @@ body {
     background: #36aa95;
     border-radius: 10px;
   }
-}
+
+  .err {
+    color: $main-color;
+    font-family: inherit;
+    font-size: 20px;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 50em;
+    animation: type 0s steps(60, end);
+    &:nth-child(2){
+      animation: type2 4s steps(60, end);
+    }
+  }
+
+  @keyframes type {
+    from { width: 0; }
+  }
+
+  @keyframes type2 {
+    0% { width: 0; }
+    50% { width: 0; }
+    100% { width: 100; }
+  }
+
+  ::selection{
+    color: black;
+    background: $main-color;
+  }
+
+}//result
 
 .command-area {
   background: #201840;
