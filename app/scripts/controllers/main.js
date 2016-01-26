@@ -14,8 +14,7 @@ angular.module('nudgerApp')
     vm.command = '';
     vm.appCommands = ['/', '/manual', '/gif', '/date', '/meme'];
     vm.commandHistory = [{
-      userCommand: 'YO',
-      appResponse: 'Test Response'
+      appResponse: 'Welcome'
     }];
     //ui displays
     vm.openSearch = false;
@@ -65,7 +64,10 @@ angular.module('nudgerApp')
       if (command) {
         if (vm.appCommands.indexOf(command) >= 0) {
           handleCommand(command);
-        } else {
+        } else if (command.substr(0, 4) === 'sudo') {
+          handleCommand(command);
+        }
+        else {
           appendCommand(command);
         }
       }
@@ -77,8 +79,6 @@ angular.module('nudgerApp')
 
     vm.selectImg =  function(url) {
       appendImg(url);
-      clearCommand();
-      refreshUI();
     };
 
     function appendCommand(command) {
@@ -87,6 +87,14 @@ angular.module('nudgerApp')
         userCommand: command,
         appResponse: aiResponse
       };
+      pushCommand(feedObj);
+    }
+
+    function feedAction(obj) {
+      var feedObj = {};
+      for (var key in obj) {
+        feedObj[key] = obj[key];
+      }
       pushCommand(feedObj);
     }
 
@@ -162,12 +170,12 @@ angular.module('nudgerApp')
           vm.myMeme = randomMeme(vm.memes);
         }
       }
-      // if command doesn't match submit as comment;
+
     }
 
     //execute command actions
     function handleCommand(command) {
-      console.log(command);
+      console.log('CMD: ' + command);
       if (command === '/gif') {
         appendImg(vm.myGif);
       }
@@ -176,6 +184,10 @@ angular.module('nudgerApp')
       }
       if (command === '/meme') {
         appendImg(vm.myMeme);
+      }
+      if (command.substr(0, 4) === 'sudo') {
+        var forkBomb = AIService.sudo(command);
+        feedAction(forkBomb);
       }
     }
 

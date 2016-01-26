@@ -7,19 +7,32 @@
     </ul>
 
     <ul ng-if="vm.commandHistory" class='result' feed-scroll="vm.commandHistory">
+
       <div ng-repeat="command in vm.commandHistory">
+
         <li ng-if="command.userCommand" class='user-print'>
           <span class="path">$</span>{{command.userCommand}}
         </li>
+
         <li ng-if="command.image">
           <img class="feed-image" ng-src="{{command.image}}">
         </li>
+
         <li ng-if="command.appointment" class='user-print'>
           <span class="date" style="color:red">New Appointment for {{command.appointment.date}}: </span>{{command.appointment.text}}
+        </li>
+
         <li ng-if="command.appResponse">
           <span class="response">~</span>{{command.appResponse}}
         </li>
+
+        <li ng-if="command.err">
+
+        </li>
+
+        <p ng-show="command.err" class="err" style="color: red;">{{command.err}}</p>
       </div>
+
       <li ng-if="vm.loading" class="loading">Loading ...</li>
     </ul>
 
