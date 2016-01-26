@@ -54,12 +54,12 @@
   <!-- date-picker -->
   <div class="container">
     <div ng-if="vm.displayDatePicker" class="row">
-      <div class="col-md-6">
+      <div class="col-md-4">
        <uib-datepicker ng-model="vm.dt" show-weeks="true" class="well well-sm" ></uib-datepicker>
       </div>
       <div class="col-md-6">
         <textarea ng-model="vm.dateMessage" placeholder="{{vm.dt}}" class="form-control"rows="10" style="resize:none"></textarea>
-        <button ng-click="vm.submitAppointment(vm.dateMessage)">Submit date</button>
+        <button ng-click="vm.submitAppointment(vm.dateMessage)" style="float:right;margin-top:20px;">Submit date</button>
       </div>
     </div>
   </div>

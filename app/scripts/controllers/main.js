@@ -156,45 +156,45 @@ angular.module('nudgerApp')
     }
 
     //ui actions
-    function readCommand(command) {
-      //no matched
-      if (vm.appCommands.indexOf(command) < 0) {
+    function readCommand(cmd) {
+      if (vm.appCommands.indexOf(cmd) < 0) {
         refreshUI();
       }
-
-      if (command === '/') {
-      	vm.openSearch = true;
-      }
-
-      if (command === '/manual') {
-        vm.displayManual = true;
-      }
-
-      if (command === '/gif') {
-        if (vm.gifs) {
-          vm.myGif = randomGif(vm.gifs);
-        } else {
-          vm.myGif = 'https://i.imgur.com/3p4mOYk.jpg';
+      switch(cmd) {
+        case '/': {
+          vm.openSearch = true;
+          }
+        break;
+        case '/manual': {
+          vm.displayManual = true;
         }
-      }
-
-      if (command === '/date') {
-        vm.displayDatePicker = true;
-      }
-
-      if (command === '/meme') {
-        if (vm.memes) {
-          vm.myMeme = randomMeme(vm.memes);
+        break;
+        case '/gif': {
+          if (vm.gifs) {
+            vm.myGif = randomGif(vm.gifs);
+          } else {
+            vm.myGif = 'https://i.imgur.com/3p4mOYk.jpg';
+          }
         }
-      }
-
-      if (command === '/mars') {
-        if (vm.mars) {
-          vm.myPhoto = randomMars(vm.mars);
-          console.log(vm.myPhoto);
+        break;
+        case '/date': {
+          vm.displayDatePicker = true;
         }
+        break;
+        case '/meme': {
+          if (vm.memes) {
+            vm.myMeme = randomMeme(vm.memes);
+          }
+        }
+        break;
+        case '/mars': {
+          if (vm.mars) {
+            vm.myPhoto = randomMars(vm.mars);
+          }
+        }
+        break;
+        default: return;
       }
-
     }
 
     //execute command actions
@@ -213,7 +213,7 @@ angular.module('nudgerApp')
         while(vm.commandHistory.length > 0) {
           vm.commandHistory.pop();
         }
-        console.log(vm.commandHistory);
+        clearCommand()
       }
       if (command === '/mars') {
         console.log(command);
