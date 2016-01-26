@@ -8,11 +8,11 @@
  * Controller of the nudgerApp
  */
 angular.module('nudgerApp')
-  .controller('MainCtrl', function (GifService, AIService) {
+  .controller('MainCtrl', function (GifService, AIService, MemeService) {
     var vm = this;
     //command ui
     vm.command = '';
-    vm.appCommands = ['/', '/manual', '/gif', '/date'];
+    vm.appCommands = ['/', '/manual', '/gif', '/date', '/meme'];
     vm.commandHistory = [{
       userCommand: 'YO',
       appResponse: 'Test Response'
@@ -27,7 +27,8 @@ angular.module('nudgerApp')
 
     function init() {
       vm.loading = true;
-      getGif();
+      getGifs();
+      getMemes();
     }
 
     function pushCommand(obj) {
@@ -41,10 +42,17 @@ angular.module('nudgerApp')
       vm.dateMessage = '';
     }
 
-    function getGif() {
+    function getGifs() {
       GifService.trendingGif().then(function(data) {
         vm.loading = false;
         vm.gifs = data;
+      });
+    }
+
+    function getMemes() {
+      MemeService.meme().then(function(data) {
+        vm.loading = false;
+        vm.memes = data;
       });
     }
 
@@ -67,7 +75,7 @@ angular.module('nudgerApp')
       appendAppointment(msg);
     };
 
-    vm.selectGif =  function(url) {
+    vm.selectImg =  function(url) {
       appendImg(url);
       clearCommand();
       refreshUI();
@@ -108,6 +116,11 @@ angular.module('nudgerApp')
       return gif.images.downsized.url;
     }
 
+    function randomMeme(memes) {
+      var meme = AIService.randomIndex(memes);
+      return meme.url;
+    }
+
     function refreshUI() {
       vm.openSearch = false;
       vm.myGif = undefined;
@@ -132,7 +145,7 @@ angular.module('nudgerApp')
       }
 
       if (command === '/gif') {
-        if(vm.gifs) {
+        if (vm.gifs) {
           vm.myGif = randomGif(vm.gifs);
         } else {
           vm.myGif = 'https://i.imgur.com/3p4mOYk.jpg';
@@ -141,6 +154,12 @@ angular.module('nudgerApp')
 
       if (command === '/date') {
         vm.displayDatePicker = true;
+      }
+
+      if (command === '/meme') {
+        if (vm.memes) {
+          vm.myMeme = randomMeme(vm.memes);
+        }
       }
       // if command doesn't match submit as comment;
     }
@@ -153,6 +172,9 @@ angular.module('nudgerApp')
       }
       if (command === '/date') {
         appendAppointment(vm.dateMessage);
+      }
+      if (command === '/meme') {
+        appendImg(vm.myMeme);
       }
     }
 
