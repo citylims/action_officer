@@ -213,6 +213,12 @@ input {
   margin: 0 auto;
 }
 
+.img-preview {
+  img {
+    max-width: 300px;
+  }
+}
+
 .command-manual {
   margin: 0 auto;
   max-width: 55em;
