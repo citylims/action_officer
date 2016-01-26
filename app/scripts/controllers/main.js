@@ -124,6 +124,7 @@ angular.module('nudgerApp')
     function refreshUI() {
       vm.openSearch = false;
       vm.myGif = undefined;
+      vm.myMeme = undefined;
       vm.displayDatePicker = false;
       vm.displayManual = false;
       return;
