@@ -13,7 +13,8 @@ angular.module('nudgerApp')
     //command ui
     vm.command = '';
     vm.appCommands = ['/', '/manual', '/gif', '/date', '/meme', '/clear', '/mars', '/lorem'];
-    vm.commandHistory = [{
+    vm.commandHistory = [];
+    vm.mainFeed = [{
       appResponse: 'Welcome'
     }];
     //ui displays
@@ -32,7 +33,7 @@ angular.module('nudgerApp')
     }
 
     function pushCommand(obj) {
-      vm.commandHistory.push(obj);
+      vm.mainFeed.push(obj);
       clearCommand();
       refreshUI();
     }
@@ -60,7 +61,6 @@ angular.module('nudgerApp')
       NasaService.mars().then(function(data){
         vm.loading = false;
         vm.mars = data.photos;
-        console.log(vm.mars);
       });
     }
 
@@ -71,6 +71,7 @@ angular.module('nudgerApp')
     vm.submitCommand = function(command) {
       //action statement ;)
       if (command) {
+        vm.commandHistory.push(command);
         if (vm.appCommands.indexOf(command) >= 0) {
           handleCommand(command);
         } else if (command.substr(0, 4) === 'sudo') {
@@ -140,8 +141,7 @@ angular.module('nudgerApp')
 
     function randomMars(mars) {
       var data = AIService.randomIndex(mars);
-      console.log(data);
-      //want to parse json and create a display obj with more info.
+      //parse json and create a display obj with more info.
       return data.img_src;
     }
 
@@ -210,8 +210,8 @@ angular.module('nudgerApp')
         appendImg(vm.myMeme);
       }
       if (command === '/clear') {
-        while(vm.commandHistory.length > 0) {
-          vm.commandHistory.pop();
+        while(vm.mainFeed.length > 0) {
+          vm.mainFeed.pop();
         }
         clearCommand();
       }
