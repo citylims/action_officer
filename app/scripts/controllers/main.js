@@ -12,7 +12,7 @@ angular.module('nudgerApp')
     var vm = this;
     //command ui
     vm.command = '';
-    vm.appCommands = ['/', '/manual', '/gif', '/date', '/meme', '/clear', '/mars', '/lorem'];
+    vm.appCommands = ['/', '/manual', '/gif', '/date', '/meme', '/clear', '/mars', '/lorem', '/nasa'];
     vm.commandHistory = [];
     vm.mainFeed = [{
       appResponse: 'Welcome'
@@ -75,6 +75,8 @@ angular.module('nudgerApp')
         if (vm.appCommands.indexOf(command) >= 0) {
           handleCommand(command);
         } else if (command.substr(0, 4) === 'sudo') {
+          handleCommand(command);
+        } else if (command.substr(0, 5) === '/nasa') {
           handleCommand(command);
         }
         else {
@@ -225,6 +227,24 @@ angular.module('nudgerApp')
       if (command === '/lorem') {
         var lorem = AIService.lorem();
         pushCommand(lorem);
+      }
+      if (command.substr(0, 5) === '/nasa') {
+        handleNasa(command);
+      }
+    }
+
+    function handleNasa(command) {
+      var query = command.split('-');
+      var key = query[1];
+      if (key) {
+        //do something with query
+        if (key === 'mars') {
+          console.log('mars')
+          vm.myPhoto = randomMars(vm.mars);
+          appendImg(vm.myPhoto);
+        }
+      } else {
+        // no args - show instructions
       }
     }
 
