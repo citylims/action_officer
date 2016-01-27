@@ -29,7 +29,7 @@ angular.module('nudgerApp')
       vm.loading = true;
       getGifs();
       getMemes();
-      getMars();
+      getNasa();
     }
 
     function pushCommand(obj) {
@@ -57,10 +57,21 @@ angular.module('nudgerApp')
       });
     }
 
+    function getNasa() {
+      getMars();
+      getAsteroids();
+    }
+
     function getMars() {
       NasaService.mars().then(function(data){
         vm.loading = false;
         vm.mars = data.photos;
+      });
+    }
+
+    function getAsteroids() {
+      NasaService.asteroids().then(function(data) {
+        vm.asteroids = data;
       });
     }
 
@@ -239,13 +250,31 @@ angular.module('nudgerApp')
       if (key) {
         //do something with query
         if (key === 'mars') {
-          console.log('mars')
           vm.myPhoto = randomMars(vm.mars);
           appendImg(vm.myPhoto);
+        }
+        if (key === 'asteroids') {
+          appendAsteroids(vm.asteroids, command);
         }
       } else {
         // no args - show instructions
       }
+    }
+
+    function appendAsteroids(data, command) {
+      var asteroids= data.near_earth_objects;
+      var today = asteroids[Object.keys(asteroids)[Object.keys(asteroids).length - 1]];
+      var asteroid = today.pop();
+      var magnitude  = Math.round(asteroid.absolute_magnitude_h);
+      var approach = asteroid.close_approach_data.pop();
+      var velocity = Math.round(approach.relative_velocity.miles_per_hour);
+      var missDistance = Math.round(approach.miss_distance.miles);
+      var msg = data.element_count + ' near earth objects have been recorded in the past 24 hours. Most recently ' + asteroid.name + ' which has an absolute magnitude of ' + magnitude + 'h, is traveling at ' + velocity + 'mph, and is ' + missDistance + 'mi. away from Earth.';
+      var feedObj = {
+        userCommand: command,
+        appResponse: msg
+      };
+      pushCommand(feedObj);
     }
 
     init();

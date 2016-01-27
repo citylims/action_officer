@@ -14,16 +14,17 @@
           <span class="path">$</span>{{command.userCommand}}
         </li>
 
+        <li ng-if="command.appResponse">
+          <span class="response">~</span>{{command.appResponse}}
+        </li>
+
         <li ng-if="command.image">
           <img class="feed-image" ng-src="{{command.image}}">
         </li>
 
+
         <li ng-if="command.appointment" class='user-print'>
           <span class="date" style="color:red">New Appointment for {{command.appointment.date}}: </span>{{command.appointment.text}}
-        </li>
-
-        <li ng-if="command.appResponse">
-          <span class="response">~</span>{{command.appResponse}}
         </li>
 
         <li ng-if="command.text">
