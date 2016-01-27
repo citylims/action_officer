@@ -2,13 +2,13 @@
 
   <div class="feed">
 
-    <ul ng-if="!vm.commandHistory" class="result">
+    <ul ng-if="!vm.mainFeed" class="result">
       <li class="ready">Ready…</li>
     </ul>
 
-    <ul ng-if="vm.commandHistory" class='result' feed-scroll="vm.commandHistory">
+    <ul ng-if="vm.mainFeed" class='result' feed-scroll="vm.mainFeed">
 
-      <div ng-repeat="command in vm.commandHistory">
+      <div ng-repeat="command in vm.mainFeed">
 
         <li ng-if="command.userCommand" class='user-print'>
           <span class="path">$</span>{{command.userCommand}}
