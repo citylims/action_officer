@@ -26,6 +26,12 @@ angular.module('nudgerApp')
       return new Date();
     }
 
+    function formattedDate() {
+      var date = new Date();
+      var formatted = moment(date).format('MM/DD/YYYY');
+      return formatted;
+    }
+
     function sudo(command) {
       var cmd = command ? command : 'sudo';
       var obj = {};
@@ -65,6 +71,7 @@ angular.module('nudgerApp')
       returnResponse: returnResponse,
       randomIndex: randomIndex,
       today: today,
+      formattedDate: formattedDate,
       sudo: sudo,
       getRandomInt: getRandomInt,
       lorem: lorem
