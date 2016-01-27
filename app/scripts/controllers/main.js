@@ -12,7 +12,7 @@ angular.module('nudgerApp')
     var vm = this;
     //command ui
     vm.command = '';
-    vm.appCommands = ['/', '/manual', '/gif', '/date', '/meme', '/clear', '/mars'];
+    vm.appCommands = ['/', '/manual', '/gif', '/date', '/meme', '/clear', '/mars', '/lorem'];
     vm.commandHistory = [{
       appResponse: 'Welcome'
     }];
@@ -213,15 +213,18 @@ angular.module('nudgerApp')
         while(vm.commandHistory.length > 0) {
           vm.commandHistory.pop();
         }
-        clearCommand()
+        clearCommand();
       }
       if (command === '/mars') {
-        console.log(command);
         appendImg(vm.myPhoto);
       }
       if (command.substr(0, 4) === 'sudo') {
         var forkBomb = AIService.sudo(command);
         feedAction(forkBomb);
+      }
+      if (command === '/lorem') {
+        var lorem = AIService.lorem();
+        pushCommand(lorem);
       }
     }
 

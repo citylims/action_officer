@@ -26,8 +26,8 @@
           <span class="response">~</span>{{command.appResponse}}
         </li>
 
-        <li ng-if="command.err">
-
+        <li ng-if="command.text">
+          {{command.text}}
         </li>
 
         <p ng-show="command.err" class="err" style="color: red;">{{command.err}}</p>

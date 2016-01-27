@@ -38,6 +38,13 @@ angular.module('nudgerApp')
       return obj;
     }
 
+    function lorem() {
+      var obj = {
+        text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      };
+      return obj;
+    }
+
     var cycle = function(index) {
       var bit = (Math.floor(Math.random() * 1000000000));
       var int = getRandomInt(bit, (bit * 2));
@@ -58,7 +65,9 @@ angular.module('nudgerApp')
       returnResponse: returnResponse,
       randomIndex: randomIndex,
       today: today,
-      sudo: sudo
+      sudo: sudo,
+      getRandomInt: getRandomInt,
+      lorem: lorem
     };
 
   });
