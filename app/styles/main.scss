@@ -138,9 +138,9 @@ body {
     white-space: nowrap;
     overflow: hidden;
     width: 50em;
-    animation: type 0s steps(60, end);
+    animation: type 4s steps(60, end);
     &:nth-child(2){
-      animation: type2 4s steps(60, end);
+      animation: type2 8s steps(60, end);
     }
   }
 
