@@ -79,7 +79,6 @@ angular.module('nudgerApp')
     function getApod() {
       NasaService.apod().then(function(data) {
         vm.apod = data;
-        console.log(data);
       });
     }
 
@@ -266,7 +265,6 @@ angular.module('nudgerApp')
         }
         if (key === 'apod') {
           appendImg(vm.apod.url);
-          // console.log(vm.apod.explanation);
           appendApod(vm.apod);
         }
       } else {
