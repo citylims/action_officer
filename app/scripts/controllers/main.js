@@ -12,7 +12,7 @@ angular.module('nudgerApp')
     var vm = this;
     //command ui
     vm.command = '';
-    vm.appCommands = ['/', '/manual', '/gif', '/date', '/meme', '/clear', '/mars', '/lorem', '/nasa'];
+    vm.appCommands = ['/', '/gif', '/date', '/meme', '/clear', '/mars', '/lorem', '/nasa'];
     vm.commandHistory = [];
     vm.mainFeed = [{
       appResponse: 'Welcome'
@@ -183,11 +183,8 @@ angular.module('nudgerApp')
       switch(cmd) {
         case '/': {
           vm.openSearch = true;
-          }
-        break;
-        case '/manual': {
           vm.displayManual = true;
-        }
+          }
         break;
         case '/gif': {
           if (vm.gifs) {
