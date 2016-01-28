@@ -28,6 +28,13 @@ angular.module('nudgerApp')
         return res.data;
       });
     }
+    // https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY
+    function apod() {
+      var query = '/planetary/apod?api_key=' + key;
+      return $http.get(apiUrl + query).then(function(res) {
+        return res.data;
+      });
+    }
 
     function processDate(date){
       var arr = [];
@@ -42,7 +49,8 @@ angular.module('nudgerApp')
 
     return {
       mars: mars,
-      asteroids: asteroids
+      asteroids: asteroids,
+      apod: apod
     };
 
   });

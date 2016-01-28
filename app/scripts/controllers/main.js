@@ -60,6 +60,7 @@ angular.module('nudgerApp')
     function getNasa() {
       getMars();
       getAsteroids();
+      getApod();
     }
 
     function getMars() {
@@ -72,6 +73,13 @@ angular.module('nudgerApp')
     function getAsteroids() {
       NasaService.asteroids().then(function(data) {
         vm.asteroids = data;
+      });
+    }
+
+    function getApod() {
+      NasaService.apod().then(function(data) {
+        vm.apod = data;
+        console.log(data);
       });
     }
 
@@ -256,9 +264,21 @@ angular.module('nudgerApp')
         if (key === 'asteroids') {
           appendAsteroids(vm.asteroids, command);
         }
+        if (key === 'apod') {
+          appendImg(vm.apod.url);
+          // console.log(vm.apod.explanation);
+          appendApod(vm.apod);
+        }
       } else {
         // no args - show instructions
       }
+    }
+
+    function appendApod(data) {
+      var feedObj = {
+        appResponse: data.explanation
+      };
+      pushCommand(feedObj);
     }
 
     function appendAsteroids(data, command) {
