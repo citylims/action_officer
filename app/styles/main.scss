@@ -39,8 +39,19 @@ body {
   min-height: 100%; // required so gradient background will stretch to fill entire viewport
 }
 
+//for three.js background
+canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -9999;
+}
+
 body {
-  background: linear-gradient(135deg,#593188,#53346D);
+  background-color: transparent;
+  /* background: linear-gradient(135deg,#593188,#53346D); */
   color: $main-color;
   font: 400 20px/1.625 "Source Sans Pro", sans-serif;
 }
