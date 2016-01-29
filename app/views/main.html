@@ -40,17 +40,14 @@
 
   </div>
 
-  <!-- overlay commands -- >
   <div ng-if="vm.displayManual" class="command-manual">
     <p ng-repeat="command in vm.appCommands"> {{command}} </p>
   </div>
 
-  <!-- user input -->
   <div class="command-area">
     <label for="command-input">$</label>
     <input type="text" id="command-input" class="command" ng-model='vm.command' ng-change='vm.change(vm.command)' my-enter="vm.submitCommand(vm.command)" placeholder="type command here…" />
   </div>
-
 
 </div>
 
