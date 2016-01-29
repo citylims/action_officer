@@ -4,8 +4,9 @@ Input actions à la Slack.
 
 ## Commands
 * ```/``` - Open search
+* ```/clear``` - Clear window.
 * ```/gif``` - Random trending gif via Giphy.
-* ```/manual``` - Show available commands.
+* ```/lorem``` - Generate lorem.
 * ```/meme``` - Random Meme via imgFlip,
 * ```/nasa-asteroids``` - Real time data for close earth objects via NASA.
 * ```/nasa-mars``` - Collected images and data from the Curiosity rover on Mars via NASA.
