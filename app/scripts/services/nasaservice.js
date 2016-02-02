@@ -42,6 +42,10 @@ angular.module('nudgerApp')
       var day = parseInt(parts[1]);
       var month = parts[0];
       var year = parts[2];
+      console.log(day);
+      if (day === 1) {
+        day = 2;
+      }
       arr[0] = year + '-' + month + '-' + (day - 1);
       arr[1] = year + '-' + month + '-' + day;
       return arr;
