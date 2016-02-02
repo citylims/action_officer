@@ -227,7 +227,7 @@ input {
   }
 }
 
-.playground {  
+.playground {
   max-width: 55em;
   margin: 0 auto;
 }
@@ -258,6 +258,11 @@ input {
   border: none;
   position: absolute;
   top: 0;
+}
+
+.datepicker-wrap {
+  position: absolute;
+  top: 215px;
 }
 
 .date-textarea {
