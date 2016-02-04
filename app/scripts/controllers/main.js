@@ -8,7 +8,7 @@
  * Controller of the nudgerApp
  */
 angular.module('nudgerApp')
-  .controller('MainCtrl', function ($http, GifService, AIService, MemeService, NasaService) {
+  .controller('MainCtrl', function ($http, GifService, AIService, MemeService, NasaService, ScService) {
     var vm = this;
     //command ui
     vm.command = '';
@@ -30,6 +30,7 @@ angular.module('nudgerApp')
       getGifs();
       getMemes();
       getNasa();
+      ScService.tester();
     }
 
     function pushCommand(obj) {
