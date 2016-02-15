@@ -30,7 +30,6 @@ angular.module('nudgerApp')
       getGifs();
       getMemes();
       getNasa();
-      ScService.tester();
     }
 
     function pushCommand(obj) {
@@ -96,6 +95,8 @@ angular.module('nudgerApp')
         } else if (command.substr(0, 4) === 'sudo') {
           handleCommand(command);
         } else if (command.substr(0, 5) === '/nasa') {
+          handleCommand(command);
+        } else if (command.substr(0, 3) === '/sc') {
           handleCommand(command);
         }
         else {
@@ -247,6 +248,32 @@ angular.module('nudgerApp')
       if (command.substr(0, 5) === '/nasa') {
         handleNasa(command);
       }
+      if (command.substr(0,3) === '/sc') {
+        handleSC(command);
+      }
+    }
+
+    function handleSC(command) {
+      var query = command.split('-');
+      var key = query[1];
+      console.log(key);
+      ScService.artistTrack().then(function(res) {
+        var tracks = res;
+        var track = AIService.randomIndex(tracks);
+        var src = ScService.embedLink(track.id);
+        console.log(src);
+        appendSC(src);
+      }, function(err) {
+        //no artist on file error msg
+        console.log(err);
+      });
+    }
+
+    function appendSC(data) {
+      var feedObj = {
+        soundCloud: data
+      };
+      pushCommand(feedObj);
     }
 
     function handleNasa(command) {

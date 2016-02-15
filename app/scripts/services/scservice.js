@@ -13,9 +13,9 @@ angular.module('nudgerApp')
     var apiUrl = 'http://api.soundcloud.com';
     var clientID = 'e5e26b3721228c688c5c6aad064ea00b';
 
-    function tester(query) {
+    function artistTrack(query) {
       query = 'kero kero bonito';
-      $http({
+      return $http({
             method: 'GET',
             url: apiUrl + '/tracks/',
             params: {
@@ -23,12 +23,18 @@ angular.module('nudgerApp')
               q: query
             }
       }).then(function(res) {
-        console.log(res);
+        return res.data;
       });
     }
 
+    function embedLink(id) {
+      var link = 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/'+ id + '&color=0066cc';
+      return link;
+    }
+
     return {
-      tester: tester
+      artistTrack: artistTrack,
+      embedLink: embedLink
     };
 
   });

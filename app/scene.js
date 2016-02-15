@@ -3,6 +3,7 @@ jQuery(document).ready(function($) {
   var canvas_height = window.innerHeight;
   var canvas_width = window.innerWidth;
   var scene = new THREE.Scene();
+  console.log(scene);
 
   //cam
   var camera = new THREE.PerspectiveCamera(75, canvas_width/canvas_height, 0.1, 1000);
