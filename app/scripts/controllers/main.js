@@ -305,18 +305,7 @@ angular.module('nudgerApp')
     }
 
     function appendAsteroids(data, command) {
-      var asteroids= data.near_earth_objects;
-      var today = asteroids[Object.keys(asteroids)[Object.keys(asteroids).length - 1]];
-      var asteroid = today.pop();
-      var magnitude  = Math.round(asteroid.absolute_magnitude_h);
-      var approach = asteroid.close_approach_data.pop();
-      var velocity = Math.round(approach.relative_velocity.miles_per_hour);
-      var missDistance = Math.round(approach.miss_distance.miles);
-      var msg = data.element_count + ' near earth objects have been recorded in the past 24 hours. Most recently ' + asteroid.name + ' which has an absolute magnitude of ' + magnitude + 'h, is traveling at ' + velocity + 'mph, and is ' + missDistance + 'mi. away from Earth.';
-      var feedObj = {
-        userCommand: command,
-        appResponse: msg
-      };
+      var feedObj = NasaService.readAsteroid(data, command);
       pushCommand(feedObj);
     }
 
